@@ -1,73 +1,30 @@
-# hello-binary
-The example of how to build the Theia-based applications with the hello-binary.
+# Theia as a Binary
 
-## Getting started
+🚨  This repo does not contain a working solution yet!
 
-Install [nvm](https://github.com/creationix/nvm#install-script).
+The goal of this repo is to get a working example of building [Theia](https://github.com/theia-ide/theia) as a binary
+and run it inside a Docker container.
 
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.5/install.sh | bash
+There are various reasons why this is desirable:
 
-Install npm and node.
+- Create Docker images that only contain the minimal code needed to run Theia.
+- Create Docker images with a different Node runtime version (Theia currently requires Node 8).
 
-    nvm install 8
-    nvm use 8
+Currently the goal is to get it to work with either [nexe](https://github.com/nexe/nexe) or [pkg](https://github.com/zeit/pkg)
+and eventually with both.
 
-Install yarn.
+# Building with nexe
 
-    npm install -g yarn
+yarn go:nexe
 
-## Running the browser example
+# Running the theia-nexe container
 
-    yarn rebuild:browser
-    cd browser-app
-    yarn start
+yarn run:nexe
 
-Open http://localhost:3000 in the browser.
+# Building with pkg
 
-## Running the Electron example
+yarn go:pkg
 
-    yarn rebuild:electron
-    cd electron-app
-    yarn start
+# Running the theia-pkg container
 
-## Developing with the browser example
-
-Start watching of hello-binary.
-
-    cd hello-binary
-    yarn watch
-
-Start watching of the browser example.
-
-    yarn rebuild:browser
-    cd browser-app
-    yarn watch
-
-Launch `Start Browser Backend` configuration from VS code.
-
-Open http://localhost:3000 in the browser.
-
-## Developing with the Electron example
-
-Start watching of hello-binary.
-
-    cd hello-binary
-    yarn watch
-
-Start watching of the electron example.
-
-    yarn rebuild:electron
-    cd electron-app
-    yarn watch
-
-Launch `Start Electron Backend` configuration from VS code.
-
-## Publishing hello-binary
-
-Create a npm user and login to the npm registry, [more on npm publishing](https://docs.npmjs.com/getting-started/publishing-npm-packages).
-
-    npm login
-
-Publish packages with lerna to update versions properly across local packages, [more on publishing with lerna](https://github.com/lerna/lerna#publish).
-
-    npx lerna publish
+yarn run:pkg

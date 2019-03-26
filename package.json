@@ -1,11 +1,16 @@
 {
   "private": true,
   "scripts": {
-    "docker:build": "docker build --build-arg 'version=theia' -f Dockerfile -t beeman/theia-nexe:latest .",
-    "docker:run": "docker run -it -p 13000:3000 --name theie-nexe --rm beeman/theia-nexe:latest",
-    "build:nexe": "BINARY=theia node ./scripts/build-nexe",
     "prepare": "lerna run prepare",
-    "rebuild:browser": "theia rebuild:browser"
+    "rebuild:browser": "theia rebuild:browser",
+    "build:nexe": "BINARY=theia node ./scripts/build-nexe",
+    "build:nexe-docker": "docker build -f Dockerfile.nexe -t beeman/theia-nexe:latest .",
+    "build:pkg": "BINARY=theia node ./scripts/build-pkg",
+    "build:pkg-docker": "docker build -f Dockerfile.pkg -t beeman/theia-pkg:latest .",
+    "go:nexe": "yarn run build:nexe && yarn run build:nexe-docker",
+    "go:pkg": "yarn run build:pkg && yarn run build:pkg-docker",
+    "run:nexe": "docker run -it -p 13000:3000 --name theie-nexe --rm beeman/theia-nexe:latest",
+    "run:pkg": "docker run -it -p 13000:3000 --name theie-pkg --rm beeman/theia-pkg:latest"
   },
   "devDependencies": {
     "lerna": "2.4.0"
@@ -15,6 +20,11 @@
     "browser-app"
   ],
   "dependencies": {
-    "nexe": "^3.0.0-beta.15"
+    "nexe": "^3.0.0-beta.15",
+    "pkg": "^4.3.7"
+  },
+  "bin": "./browser-app/src-gen/backend/main.js",
+  "pkg": {
+
   }
 }
